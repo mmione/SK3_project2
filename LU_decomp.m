@@ -39,18 +39,18 @@ function x = LU_decomp(A, B, size)
     
     U = A;
     
-    disp(L);
-    disp(U);
+    %disp(L);
+    %disp(U);
     
     % We now have the upper and lower matrices. We can use these to solve
     % for x, what we are looking for. 
     
     y = gauss_elim(L,B,size);
     
-    x = gauss_elim(U,y,size);
+    x_solved = gauss_elim(U,y,size);
     
     disp("Solution")
-    disp(x);
-    x = L;
+    disp(x_solved);
+    x = x_solved;
     
 end
