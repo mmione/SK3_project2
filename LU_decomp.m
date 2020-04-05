@@ -2,7 +2,8 @@ function x = LU_decomp(A, B, size)
         
     % We want to solve Ax = B, where A and B are known and we are solving
     % x. 
-    size=size;
+    
+    size = size;
     A = A; 
     B= B;
     
@@ -10,39 +11,46 @@ function x = LU_decomp(A, B, size)
     
     L = tril(L); % Grabs the LOWER TRIANGULAR portion of the matrix. With this method, we get some unwanted ones. 
     
+    rowshift = 1;
     
-    for col = [1:2]
+    for col = [1:size-1]
             
-        for row = [1:2] % We will start from the top and make this simple. 
+        for row = [rowshift:size-1] % We will start from the top and make this simple. 
         
-        divisor = A(row, col);
+        divisor = A(rowshift, col);
         number = A(row+1, col);
         
-        scaling_factor = number/divisor;
+        scaling_factor = -number/divisor;
         
         % Need to do the row operations now!
         
-        A = A(row+1, [1:3]) + scaling_factor*A(row,[1:3]);
+        A(row+1, [1:size]) = A(row+1, [1:size]) + scaling_factor*A(rowshift,[1:size]);
         
-        if scaling_factor < 0 % Results if both signs are the same: 
-            
-            L(row+1, col) = scaling_factor;
+       
+        L(row+1, col) = -scaling_factor;
+             
+        % this row is done, move onto the lower one!
         
-        else 
-            
-            L(row+1, col) = -scaling_factor;
-        
-        end
-        
-        
-        
-        
-
-    end   
+        end   
     
+        rowshift = rowshift + 1 ; % We need to shift down rows gradually as we reach the bottom of the matrix. 
+        
     end
-    disp(L);
     
+    U = A;
+    
+    disp(L);
+    disp(U);
+    
+    % We now have the upper and lower matrices. We can use these to solve
+    % for x, what we are looking for. 
+    
+    y = gauss_elim(L,B,size);
+    
+    x = gauss_elim(U,y,size);
+    
+    disp("Solution")
+    disp(x);
     x = L;
     
 end

@@ -1,0 +1,67 @@
+function x = gauss_elim(A, B, size) % Returns the solved X value matrix. 
+    
+    % Modular implementation of guassian elimination.
+    
+    A = A;
+    B = B;
+    size = size;
+    
+    augmented = [A  B]; % creates an augmented matrix we can work easily on. The last column must be PROTECTED 
+    
+    % We want to do a similar process to what we did in finding the
+    % triangular matrices in the LU function.
+    
+    
+    % Forward Phase - gauss elim.
+    rowshift = 1;
+    
+    for col = [1:size-1]
+            
+        for row = [rowshift:size-1] % We will start from the top and make this simple. 
+        
+        divisor = augmented(rowshift, col);
+        number = augmented(row+1, col);
+        
+        scaling_factor = -number/divisor;
+        
+        % Need to do the row operations now!
+        
+        augmented(row+1, [1:size+1]) = augmented(row+1, [1:size+1]) + scaling_factor*augmented(rowshift,[1:size+1]);
+             
+        % this row is done, move onto the lower one!
+        
+        end   
+    
+        rowshift = rowshift + 1 ; % We need to shift down rows gradually as we reach the bottom of the matrix. 
+        
+    end
+    
+    disp(augmented);
+   
+    A = augmented(1:size,1:size);
+    B = augmented (1:size, size+1);
+    
+    disp(A);
+    disp(B);
+    % End of forward phase ... 
+    
+    % Start back-substitution phase :
+    
+    % We need an array to store the solved x values...
+    
+    x_vals = zeros(size, 1);
+    
+    % Start at the bottom corner, work your way up.
+    
+    
+    for index = [size:-1:1]
+    
+        x_vals(index) = (B(index) - A(index,index+1:size)*x_vals(index+1:size))/A(index,index);
+        
+    end
+    
+    disp(x_vals);
+    
+    x = x_vals;
+
+end

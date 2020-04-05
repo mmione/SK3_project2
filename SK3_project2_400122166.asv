@@ -2,11 +2,11 @@
 
 % LU decomposition algorithm is done in a seperate .m file! 
 
-% a = [1 1 -1; 1 -2 3; 2 3 1];
+a = [1 1 -1; 1 -2 3; 2 3 1];
 
-% b= [4 -6 7]';
-% 
-% LU_decomp(a,b,3);
+b= [4 -6 7]';
+
+LU_decomp(a,b,3);
 
 % % % % % % %
 
@@ -45,12 +45,4 @@ imshow(blurred_image);
 % We have created the blurred image. 
 
 % NOW: we will pass the blurred image and the blurring matrix into the
-% gaussian elimination algorithm to solve for the ((hopefully)) ORIGINAL
-% matrix. 
-
-deblurred_as_column = LU_decomp(blurring_matrix, blurred_image_as_column, row^2);
-
-deblurred_image = reshape(deblurred_as_column', row, row)'; % Reverts the columnized image to the original matrix format. The inverse of the original action.
-
-figure(3);
-disp(deblurred_image);
+% gaussian eliminati

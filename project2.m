@@ -70,13 +70,13 @@ disp('Done!')
 
 
 
-function x = Solving_Linear_Equations_with_LU_decomposition(A, b)
-% write your code here
-% the output x should be inv(A)*b (or A\b), but you CANNOT use it as your final answer.
-% you CANNOT use any high-level function in your code, for example inv(), matrix division, factorLU(), solve(), etc.
-
-% for demonstration only:
-x = A\b;
-
-end
+% function x = Solving_Linear_Equations_with_LU_decomposition(A, b)
+% % write your code here
+% % the output x should be inv(A)*b (or A\b), but you CANNOT use it as your final answer.
+% % you CANNOT use any high-level function in your code, for example inv(), matrix division, factorLU(), solve(), etc.
+% 
+% % for demonstration only:
+% x = A\b;
+% 
+% end
 
